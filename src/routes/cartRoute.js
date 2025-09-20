@@ -1,20 +1,27 @@
 import express from "express";
-import getActiveCartForUser from "../services/cartService.js";
+import {
+  getActiveCartForUser,
+  addItemToCart,
+  updateItemInCart,
+  deleteItemInCart,
+  clearCart,
+} from "../services/cartService.js";
 import validateJWT from "../middlewares/validateJWT.js";
+
 const router = express.Router();
 
 router.get("/", validateJWT, async (req, res) => {
-  const id = req?.user?._id;
-  const cart = await getActiveCartForUser({ userId: id });
+  const userId = req?.user?._id;
+  const cart = await getActiveCartForUser({ userId });
   res.status(200).send(cart);
 });
 
 router.post("/items", validateJWT, async (req, res) => {
-  const id = req?.user?._id;
+  const userId = req?.user?._id;
   const { product, quantity } = req.body;
 
   const response = await addItemToCart({
-    userId: id,
+    userId,
     productId: product,
     quantity,
   });
@@ -22,9 +29,29 @@ router.post("/items", validateJWT, async (req, res) => {
 });
 
 router.put("/items", validateJWT, async (req, res) => {
-  const id = req?.user?._id;
+  const userId = req?.user?._id;
   const { product, quantity } = req.body;
-  const response = await updateItemInCart({ userId, productId, quantity });
-  req.status(response.statusCode).send(response.data);
+
+  const response = await updateItemInCart({
+    userId,
+    productId: product,
+    quantity,
+  });
+  res.status(response.statusCode).send(response.data);
 });
+
+router.delete("/items/:productId", validateJWT, async (req, res) => {
+  const userId = req?.user?._id;
+  const { productId } = req.params;
+
+  const response = await deleteItemInCart({ userId, productId });
+  res.status(response.statusCode).send(response.data);
+});
+
+router.delete("/", validateJWT, async (req, res) => {
+  const userId = req?.user?._id;
+  const response = await clearCart({ userId });
+  res.status(response.statusCode).send(response.data);
+});
+
 export default router;

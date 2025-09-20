@@ -1,5 +1,6 @@
 import express from "express";
 import { login, register } from "../services/userService.js";
+import validateJWT from "../middlewares/validateJWT.js";
 const router = express.Router();
 
 router.post("/register", async (req, res) => {
@@ -21,5 +22,6 @@ router.post("/login", async (req, res) => {
   });
   res.status(statusCode).send(data);
 });
+
 
 export default router;
