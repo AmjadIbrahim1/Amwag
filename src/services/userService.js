@@ -18,7 +18,10 @@ export const register = async ({ firstName, lastName, email, password }) => {
     });
     await newUser.save();
 
-    return { data: generateJWT({ firstName, lastName, email }), statusCode: 200 };
+    return {
+      data: generateJWT({ firstName, lastName, email }),
+      statusCode: 200,
+    };
   } catch (err) {
     return { data: err.message, statusCode: 500 };
   }
@@ -50,7 +53,7 @@ export const login = async ({ email, password }) => {
 };
 
 const generateJWT = (data) => {
-  return jwt.sign(data, "5adDHzTXw1owqx8MLM4btYcguKm8Eyw2", {
-    expiresIn: "1h", 
+  return jwt.sign(data, process.env.JWT_SECRET || "", {
+    expiresIn: "1h",
   });
 };
