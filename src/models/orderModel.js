@@ -3,7 +3,7 @@ import mongoose, { Schema } from "mongoose";
 const orderItemSchema = new Schema(
   {
     productTitle: { type: String, required: true },
-    productImage: { type: String },
+    productImage: { type: String, required: false },
     quantity: { type: Number, required: true, min: 1 },
     unitPrice: { type: Number, required: true, min: 0 },
   },

@@ -5,18 +5,22 @@ export const getAllProducts = async () => {
 };
 
 export const seedInitialProducts = async () => {
-  const products = [
-    { title: "title1", image: "image1", price: "50", stock: "120" },
-    { title: "title1", image: "image1", price: "50", stock: "120" },
-    { title: "title1", image: "image1", price: "50", stock: "120" },
-    { title: "title1", image: "image1", price: "50", stock: "120" },
-    { title: "title1", image: "image1", price: "50", stock: "120" },
-    { title: "title1", image: "image1", price: "50", stock: "120" },
-    { title: "title1", image: "image1", price: "50", stock: "120" },
-  ];
+  try {
+    const products = [
+      { title: "title1", image: "image1", price: "50", stock: "120" },
+      { title: "title1", image: "image1", price: "50", stock: "120" },
+      { title: "title1", image: "image1", price: "50", stock: "120" },
+      { title: "title1", image: "image1", price: "50", stock: "120" },
+      { title: "title1", image: "image1", price: "50", stock: "120" },
+      { title: "title1", image: "image1", price: "50", stock: "120" },
+      { title: "title1", image: "image1", price: "50", stock: "120" },
+    ];
 
-  const nowProducts = await getAllProducts();
-  if (nowProducts.length === 0) {
-    await productModel.insertMany(products);
+    const nowProducts = await getAllProducts();
+    if (nowProducts.length === 0) {
+      await productModel.insertMany(products);
+    }
+  } catch (err) {
+    console.error("Cannot seed database");
   }
 };
