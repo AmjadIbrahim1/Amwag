@@ -5,6 +5,7 @@ import {
   updateItemInCart,
   deleteItemInCart,
   clearCart,
+  checkout
 } from "../services/cartService.js";
 import validateJWT from "../middlewares/validateJWT.js";
 
@@ -25,6 +26,7 @@ router.post("/items", validateJWT, async (req, res) => {
     productId: product,
     quantity,
   });
+
   res.status(response.statusCode).send(response.data);
 });
 
@@ -37,6 +39,7 @@ router.put("/items", validateJWT, async (req, res) => {
     productId: product,
     quantity,
   });
+
   res.status(response.statusCode).send(response.data);
 });
 
@@ -51,6 +54,14 @@ router.delete("/items/:productId", validateJWT, async (req, res) => {
 router.delete("/", validateJWT, async (req, res) => {
   const userId = req?.user?._id;
   const response = await clearCart({ userId });
+  res.status(response.statusCode).send(response.data);
+});
+
+router.post("/checkout", validateJWT, async (req, res) => {
+  const userId = req?.user?._id;
+  const { address } = req.body;
+
+  const response = await checkout({ userId, address });
   res.status(response.statusCode).send(response.data);
 });
 
