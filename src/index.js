@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import userRoute from "./routes/userRoute.js";
+import cartRoute from "./routes/cartRoute.js"
 import { seedInitialProducts } from "./services/productService.js";
 import productRoute from "./routes/productRoute.js";
 const app = express();
@@ -16,6 +17,7 @@ seedInitialProducts();
 
 app.use("/user", userRoute);
 app.use("/product", productRoute);
+app.use("/cart", cartRoute);
 app.listen(port, () => {
   console.log("OK");
 });
