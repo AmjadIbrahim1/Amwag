@@ -1,12 +1,13 @@
-import dotenv from "dotenv";
+
+dotenv.config();
 import express from "express";
 import mongoose from "mongoose";
 import userRoute from "./routes/userRoute.js";
 import cartRoute from "./routes/cartRoute.js";
 import productRoute from "./routes/productRoute.js";
 import { seedInitialProducts } from "./services/productService.js";
+import dotenv from "dotenv";
 import cors from "cors"
-dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3001;
