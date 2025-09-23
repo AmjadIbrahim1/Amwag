@@ -1,22 +1,22 @@
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import "./Register.css";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { BASE_URL } from "../constants/baseURL";
+import Typography from "@mui/material/Typography";
 
 export default function RegisterPage() {
+  let [error, setError] = useState("");
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
   const emailRef = useRef(null);
-  const passwordRef = useRef(null);
+  const passwordRef = useRef(null); 
 
   const onSubmit = async () => {
     const firstName = firstNameRef.current?.value;
     const lastName = lastNameRef.current?.value;
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
-
-    console.log(firstName, lastName, email, password);
 
     let response = await fetch(`${BASE_URL}/user/register`, {
       method: "POST",
@@ -30,9 +30,11 @@ export default function RegisterPage() {
         password,
       }),
     });
-
+    if (!response.ok) {
+      setError("User already exists!");
+      return;
+    }
     const data = await response.json();
-    console.log(data);
   };
 
   return (
@@ -57,6 +59,7 @@ export default function RegisterPage() {
 
           <div className="field">
             <input
+              name={"firstName"}
               ref={firstNameRef}
               autoComplete="off"
               placeholder="First Name"
@@ -66,6 +69,7 @@ export default function RegisterPage() {
           </div>
           <div className="field">
             <input
+              name={"lastName"}
               ref={lastNameRef}
               autoComplete="off"
               placeholder="Last Name"
@@ -76,6 +80,7 @@ export default function RegisterPage() {
 
           <div className="field">
             <input
+              name={"email"}
               ref={emailRef}
               autoComplete="off"
               placeholder="Email"
@@ -86,6 +91,7 @@ export default function RegisterPage() {
 
           <div className="field">
             <input
+              name={"email"}
               ref={passwordRef}
               placeholder="Password"
               className="input-field"
@@ -100,6 +106,7 @@ export default function RegisterPage() {
           >
             Register
           </button>
+          {error && <Typography sx={{ color: "red" }}>{error}</Typography>}
         </form>
       </Box>
     </Container>
