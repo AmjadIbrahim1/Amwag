@@ -1,17 +1,18 @@
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
 import "./Register.css";
 import { useRef, useState } from "react";
 import { BASE_URL } from "../constants/baseURL";
-import Typography from "@mui/material/Typography";
+import { useAuth } from "../context/AuthContext";
 
 export default function RegisterPage() {
-  let [error, setError] = useState("");
-  
+  const [error, setError] = useState("");
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
   const emailRef = useRef(null);
-  const passwordRef = useRef(null); 
+  const passwordRef = useRef(null);
+  const { login } = useAuth();
 
   const onSubmit = async () => {
     const firstName = firstNameRef.current?.value;
@@ -19,23 +20,29 @@ export default function RegisterPage() {
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
 
-    let response = await fetch(`${BASE_URL}/user/register`, {
+    if (!firstName || !lastName || !email || !password) {
+      setError("Please fill all fields");
+      return;
+    }
+
+    const response = await fetch(`${BASE_URL}/user/register`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        firstName,
-        lastName,
-        email,
-        password,
-      }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ firstName, lastName, email, password }),
     });
+
     if (!response.ok) {
       setError("User already exists!");
       return;
     }
-    const data = await response.json();
+
+    const token = await response.json();
+    if (!token) {
+      setError("No token returned");
+      return;
+    }
+
+    login(email, token);
   };
 
   return (
@@ -51,16 +58,14 @@ export default function RegisterPage() {
         }}
       >
         <form
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
+          onSubmit={(e) => e.preventDefault()}
           className="form"
         >
           <p id="heading">Register</p>
 
           <div className="field">
             <input
-              name={"firstName"}
+              name="firstName"
               ref={firstNameRef}
               autoComplete="off"
               placeholder="First Name"
@@ -68,9 +73,10 @@ export default function RegisterPage() {
               type="text"
             />
           </div>
+
           <div className="field">
             <input
-              name={"lastName"}
+              name="lastName"
               ref={lastNameRef}
               autoComplete="off"
               placeholder="Last Name"
@@ -81,7 +87,7 @@ export default function RegisterPage() {
 
           <div className="field">
             <input
-              name={"email"}
+              name="email"
               ref={emailRef}
               autoComplete="off"
               placeholder="Email"
@@ -92,7 +98,7 @@ export default function RegisterPage() {
 
           <div className="field">
             <input
-              name={"email"}
+              name="password"
               ref={passwordRef}
               placeholder="Password"
               className="input-field"
@@ -107,6 +113,7 @@ export default function RegisterPage() {
           >
             Register
           </button>
+
           {error && <Typography sx={{ color: "red" }}>{error}</Typography>}
         </form>
       </Box>
