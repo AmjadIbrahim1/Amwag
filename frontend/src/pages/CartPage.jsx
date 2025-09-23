@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { BASE_URL } from "../constants/baseURL";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/Auth/AuthContext";
 
 export default function CartPage() {
   const { token } = useAuth();

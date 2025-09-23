@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import "./Register.css";
 import { useRef, useState } from "react";
 import { BASE_URL } from "../constants/baseURL";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/Auth/AuthContext";
 import { useNavigate } from "react-router-dom";
 export default function RegisterPage() {
   const [error, setError] = useState("");
