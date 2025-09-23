@@ -17,6 +17,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Badge from "@mui/material/Badge";
+import { styled } from "@mui/material/styles";
 
 function Navbar() {
   const { username, isAuthenticated, logout } = useAuth();
@@ -31,11 +34,15 @@ function Navbar() {
   const handelLogin = () => {
     navigate("/login");
   };
+  const handelCart = () => {
+    navigate("/cart");
+  };
   const handelLogout = () => {
     logout();
     navigate("/");
     handleCloseUserMenu();
   };
+
   return (
     <AppBar
       position="static"
@@ -98,7 +105,18 @@ function Navbar() {
 
           <Box sx={{ flexGrow: 1 }} />
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box
+            sx={{ flexGrow: 0 }}
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            gap={4}
+          >
+            <IconButton aria-label="cart" onClick={handelCart}>
+              <Badge badgeContent={4} color="secondary">
+                <ShoppingCartIcon sx={{ color: "wheat" }} />
+              </Badge>
+            </IconButton>
             {isAuthenticated ? (
               <>
                 <Tooltip title="Open settings">
