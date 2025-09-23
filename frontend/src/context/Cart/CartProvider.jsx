@@ -5,12 +5,31 @@ const CartProvider = ({ children }) => {
   let [cartItems, setCartItems] = useState([]);
   let [totalAmount, setTotalAmount] = useState(0);
 
-  const addItemToCart = (item) => {
-    console.log("added item:", item); 
-    setCartItems((prev) => [...prev, item]);
+  const addItemToCart = (product) => {
+    setCartItems((prevItems) => {
+      const existing = prevItems.find((item) => item.productId === product._id);
 
-    
-    setTotalAmount((prev) => prev + item.price);
+      if (existing) {
+        return prevItems.map((item) =>
+          item.productId === product._id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      }
+
+      return [
+        ...prevItems,
+        {
+          productId: product._id,
+          title: product.title,
+          image: product.image,
+          unitPrice: product.price,
+          quantity: 1,
+        },
+      ];
+    });
+
+    setTotalAmount((prevTotal) => prevTotal + product.price);
   };
 
   return (
