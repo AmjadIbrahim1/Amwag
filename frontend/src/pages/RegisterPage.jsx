@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 
 export default function RegisterPage() {
   let [error, setError] = useState("");
+  
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
   const emailRef = useRef(null);
