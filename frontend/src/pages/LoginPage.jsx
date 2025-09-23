@@ -6,35 +6,32 @@ import { useRef, useState } from "react";
 import { BASE_URL } from "../constants/baseURL";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-export default function RegisterPage() {
+export default function LoginPage() {
   const [error, setError] = useState("");
-  const firstNameRef = useRef(null);
-  const lastNameRef = useRef(null);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+
   const navigate = useNavigate();
 
   const { login } = useAuth();
 
   const onSubmit = async () => {
-    const firstName = firstNameRef.current?.value;
-    const lastName = lastNameRef.current?.value;
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
 
-    if (!firstName || !lastName || !email || !password) {
+    if (!email || !password) {
       setError("Please fill all fields");
       return;
     }
 
-    const response = await fetch(`${BASE_URL}/user/register`, {
+    const response = await fetch(`${BASE_URL}/user/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ firstName, lastName, email, password }),
+      body: JSON.stringify({ email, password }),
     });
 
     if (!response.ok) {
-      setError("User already exists!");
+      setError("Unable to login user");
       return;
     }
 
@@ -61,29 +58,7 @@ export default function RegisterPage() {
         }}
       >
         <form onSubmit={(e) => e.preventDefault()} className="form">
-          <p id="heading">Register</p>
-
-          <div className="field">
-            <input
-              name="firstName"
-              ref={firstNameRef}
-              autoComplete="off"
-              placeholder="First Name"
-              className="input-field"
-              type="text"
-            />
-          </div>
-
-          <div className="field">
-            <input
-              name="lastName"
-              ref={lastNameRef}
-              autoComplete="off"
-              placeholder="Last Name"
-              className="input-field"
-              type="text"
-            />
-          </div>
+          <p id="heading">Login</p>
 
           <div className="field">
             <input
@@ -111,7 +86,7 @@ export default function RegisterPage() {
             style={{ marginTop: "15px" }}
             className="button3"
           >
-            Register
+            Login
           </button>
 
           {error && <Typography sx={{ color: "red" }}>{error}</Typography>}
