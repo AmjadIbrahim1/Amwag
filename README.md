@@ -6,7 +6,7 @@ Amwag is a full-stack e-commerce application built with:
 
 🎨 Frontend: React + Material UI
 
-🛢️ Database: (MongoDB – adjust based on your setup)
+🛢️ Database: (MongoDB)
 
 🔐 Authentication: JWT-based Auth
 
