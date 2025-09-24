@@ -24,22 +24,7 @@ Amwag is a full-stack e-commerce application built with:
 
 🎨 Modern and responsive UI with Material UI
 
-📂 Project Structure
-Amwag/
-│── backend/ (Node.js + TS)
-│   ├── src/
-│   │   ├── models/       # Models (User, Product, Order, Cart)
-│   │   ├── routes/       # API routes
-│   │   ├── services/     # Business logic
-│   │   ├── middlewares/  # JWT & other middlewares
-│   │   └── index.ts      # Server entry point
-│── frontend/ (React + MUI)
-│   ├── src/
-│   │   ├── components/   # UI components
-│   │   ├── pages/        # App pages (Products, Cart, Login ...)
-│   │   ├── hooks/        # Custom React hooks
-│   │   └── App.jsx       # Root component
-└── README.md
+
 
 🚀 Getting Started
 1️⃣ Backend
