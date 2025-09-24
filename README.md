@@ -6,7 +6,7 @@ Amwag is a full-stack e-commerce application built with:
 
 🎨 Frontend: React + Material UI
 
-🛢️ Database: (MongoDB or SQL – adjust based on your setup)
+🛢️ Database: (MongoDB – adjust based on your setup)
 
 🔐 Authentication: JWT-based Auth
 
@@ -34,7 +34,7 @@ npm run dev
 
 
 Backend runs on:
-👉 http://localhost:5000
+👉 http://localhost:5001
 
 2️⃣ Frontend
 cd frontend
@@ -43,21 +43,19 @@ npm start
 
 
 Frontend runs on:
-👉 http://localhost:3000
+👉 http://localhost:3001
 
 🔑 Environment Variables
 
 Create a .env file inside backend/ with:
 
-PORT=5000
+PORT=3001
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
 
 📌 API Endpoints
 Method	Endpoint	Description	Auth
-POST	/api/users/register	Register a new user	❌
-POST	/api/users/login	User login	❌
-GET	/api/products	Fetch all products	❌
+
 POST	/api/products	Add a new product	✅
 GET	/api/cart	Get cart contents	✅
 POST	/api/cart	Add item to cart	✅
