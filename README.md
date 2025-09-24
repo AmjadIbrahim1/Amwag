@@ -1,0 +1,96 @@
+🛍️ Amwag E-Commerce
+
+Amwag is a full-stack e-commerce application built with:
+
+⚡ Backend: Node.js + Express + TypeScript
+
+🎨 Frontend: React + Material UI
+
+🛢️ Database: (MongoDB or SQL – adjust based on your setup)
+
+🔐 Authentication: JWT-based Auth
+
+✨ Features
+
+👤 User management (register, login, update profile)
+
+🛒 Cart management (add, update, remove items)
+
+📦 Order management (create and track orders)
+
+🛍️ Product management (list, add, update, delete products)
+
+🔐 Secure APIs with JWT authentication
+
+🎨 Modern and responsive UI with Material UI
+
+📂 Project Structure
+Amwag/
+│── backend/ (Node.js + TS)
+│   ├── src/
+│   │   ├── models/       # Models (User, Product, Order, Cart)
+│   │   ├── routes/       # API routes
+│   │   ├── services/     # Business logic
+│   │   ├── middlewares/  # JWT & other middlewares
+│   │   └── index.ts      # Server entry point
+│── frontend/ (React + MUI)
+│   ├── src/
+│   │   ├── components/   # UI components
+│   │   ├── pages/        # App pages (Products, Cart, Login ...)
+│   │   ├── hooks/        # Custom React hooks
+│   │   └── App.jsx       # Root component
+└── README.md
+
+🚀 Getting Started
+1️⃣ Backend
+cd backend
+npm install
+npm run dev
+
+
+Backend runs on:
+👉 http://localhost:5000
+
+2️⃣ Frontend
+cd frontend
+npm install
+npm start
+
+
+Frontend runs on:
+👉 http://localhost:3000
+
+🔑 Environment Variables
+
+Create a .env file inside backend/ with:
+
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+
+📌 API Endpoints
+Method	Endpoint	Description	Auth
+POST	/api/users/register	Register a new user	❌
+POST	/api/users/login	User login	❌
+GET	/api/products	Fetch all products	❌
+POST	/api/products	Add a new product	✅
+GET	/api/cart	Get cart contents	✅
+POST	/api/cart	Add item to cart	✅
+POST	/api/orders	Create new order	✅
+📸 Screenshots
+
+🤝 Contributing
+
+Fork the repo
+
+Create a new branch feature/your-feature
+
+Commit your changes
+
+Open a Pull Request
+
+📜 License
+
+This project is licensed under the MIT License – feel free to use and modify it.
+
+تحب أعملهولك دلوقتي كـ ملف README.md جاهز للتحميل تحطه مباشرة في الريبو؟
