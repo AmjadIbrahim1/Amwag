@@ -75,5 +75,3 @@ Open a Pull Request
 📜 License
 
 This project is licensed under the MIT License – feel free to use and modify it.
-
-تحب أعملهولك دلوقتي كـ ملف README.md جاهز للتحميل تحطه مباشرة في الريبو؟
